@@ -38,28 +38,28 @@
  *
  */
 
-#include "Adafruit_24bargraph.h"
+#include "Pico_24bargraph.h"
 #include "I2CDevice.h"
 
 #ifndef _BV
 #define _BV(bit) (1 << (bit)) ///< Bit-value if not defined by Arduino
 #endif
 
-void Adafruit_LEDBackpack::setBrightness(uint8_t b) {
+void Pico_LEDBackpack::setBrightness(uint8_t b) {
   if (b > 15)
     b = 15; // limit to max brightness
   uint8_t buffer = HT16K33_CMD_BRIGHTNESS | b;
   _i2c_dev->write(&buffer, 1);
 }
 
-void Adafruit_LEDBackpack::blinkRate(uint8_t b) {
+void Pico_LEDBackpack::blinkRate(uint8_t b) {
   if (b > 3)
     b = 0; // turn off if not sure
   uint8_t buffer = HT16K33_BLINK_CMD | HT16K33_BLINK_DISPLAYON | (b << 1);
   _i2c_dev->write(&buffer, 1);
 }
 
-Adafruit_LEDBackpack::Adafruit_LEDBackpack(I2CDevice* device) {
+Pico_LEDBackpack::Pico_LEDBackpack(I2CDevice* device) {
   _i2c_dev = device;
 
   // turn on oscillator
@@ -77,7 +77,7 @@ Adafruit_LEDBackpack::Adafruit_LEDBackpack(I2CDevice* device) {
   setBrightness(15); // max brightness
 }
 
-void Adafruit_LEDBackpack::writeDisplay(void) {
+void Pico_LEDBackpack::writeDisplay(void) {
   uint8_t buffer[17];
 
   buffer[0] = 0x00; // start at address $00
@@ -89,7 +89,7 @@ void Adafruit_LEDBackpack::writeDisplay(void) {
   _i2c_dev->write(buffer, 17);
 }
 
-void Adafruit_LEDBackpack::clear(void) {
+void Pico_LEDBackpack::clear(void) {
   for (uint8_t i = 0; i < 8; i++) {
     displaybuffer[i] = 0;
   }
@@ -97,9 +97,9 @@ void Adafruit_LEDBackpack::clear(void) {
 
 /******************************* 24 BARGRAPH OBJECT */
 
-Adafruit_24bargraph::Adafruit_24bargraph(I2CDevice* i2cdev): Adafruit_LEDBackpack(i2cdev) {}
+Pico_24bargraph::Pico_24bargraph(I2CDevice* i2cdev): Pico_LEDBackpack(i2cdev) {}
 
-void Adafruit_24bargraph::setBar(uint8_t bar, uint8_t color) {
+void Pico_24bargraph::setBar(uint8_t bar, uint8_t color) {
   uint16_t a, c;
 
   if (bar < 12)

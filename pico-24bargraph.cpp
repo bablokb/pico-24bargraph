@@ -12,14 +12,14 @@
 #include <stdio.h>
 #include <hardware/i2c.h>
 #include "I2CDevice.h"
-#include "Adafruit_24bargraph.h"
+#include "Pico_24bargraph.h"
 
 int main() {
     stdio_init_all();
 
     // create i2c-device and bargraph-object
     I2CDevice* i2cdev = new I2CDevice(BAR_I2C,BAR_ADDR,BAR_SDA,BAR_SCL,BAR_SPEED);
-    Adafruit_24bargraph* bar = new Adafruit_24bargraph(i2cdev);
+    Pico_24bargraph* bar = new Pico_24bargraph(i2cdev);
 
     // fill graph with three colors, 8 bars each
     for (int i=0; i<8;++i) {

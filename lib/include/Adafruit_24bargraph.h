@@ -29,8 +29,8 @@
  * MIT license, all text above must be included in any redistribution
  */
 
-#ifndef Adafruit_24bargraph_h
-#define Adafruit_24bargraph_h
+#ifndef Pico_24bargraph_h
+#define Pico_24bargraph_h
 
 #include "I2CDevice.h"
 
@@ -55,12 +55,12 @@
 /*!
     @brief  Class encapsulating the raw HT16K33 controller device.
 */
-class Adafruit_LEDBackpack {
+class Pico_LEDBackpack {
 public:
   /*!
     @brief  Constructor for HT16K33 devices.
   */
-  Adafruit_LEDBackpack(I2CDevice* device);
+  Pico_LEDBackpack(I2CDevice* device);
 
   /*!
     @brief  Set display brightness.
@@ -98,12 +98,12 @@ protected:
 /*!
     @brief  Class for 24-element bargraph displays.
 */
-class Adafruit_24bargraph : public Adafruit_LEDBackpack {
+class Pico_24bargraph : public Pico_LEDBackpack {
 public:
   /*!
     @brief  Constructor for 24-element bargraph displays.
   */
-  Adafruit_24bargraph(I2CDevice* i2cdev);
+  Pico_24bargraph(I2CDevice* i2cdev);
 
   /*!
     @brief  Set color a single bar (dot).
@@ -113,4 +113,4 @@ public:
   void setBar(uint8_t bar, uint8_t color);
 };
 
-#endif // Adafruit_24bargraph_h
+#endif // Pico_24bargraph_h
